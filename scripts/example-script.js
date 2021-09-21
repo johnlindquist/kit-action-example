@@ -6,7 +6,9 @@ let { Octokit } = await npm("@octokit/rest")
 try {
   let { owner, repo } = g.context.repo
   console.log({ owner, repo })
-  let github = new Octokit(process.env.GITHUB_TOKEN)
+  let github = new Octokit({
+    auth: process.env.GITHUB_TOKEN,
+  })
 
   let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
   let releaseResponse =
