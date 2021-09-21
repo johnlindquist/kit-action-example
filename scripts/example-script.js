@@ -1,18 +1,18 @@
 console.log(`👀 Starting...`)
 
-let { GitHub, context } = await npm("@actions/github")
+let g = await npm("@actions/github")
 
 console.log(
   `🟢 AFTER npm ${process.env.GITHUB_TOKEN.slice(0, 5)}`
 )
-let { owner, repo } = context.repo
+let { owner, repo } = g.context.repo
 
-console.log({ owner, repo, GitHub })
+console.log({ owner, repo, github })
 
 console.log(`🧠 Right before init Github`)
 
 try {
-  let github = new GitHub(process.env.GITHUB_TOKEN)
+  let github = g.getOctokit(process.env.GITHUB_TOKEN)
 
   console.log({ github })
 
