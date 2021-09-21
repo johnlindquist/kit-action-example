@@ -36,10 +36,9 @@ try {
     await github.rest.repos.uploadReleaseAsset({
       owner,
       repo,
-      url: releaseResponse.data.upload_url,
+      releaseId: releaseResponse.data.id,
       name: `john.png`,
-      assetPath: `./john.png`,
-      file: await readFile("./john.png"),
+      data: await readFile("./john.png"),
     })
 
   console.log(`🤔 uploadResponse`)
