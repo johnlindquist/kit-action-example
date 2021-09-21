@@ -19,7 +19,7 @@ let releaseResponse = await github.repos.createRelease({
   tag_name: `some-tag`,
 })
 
-let uploadResponse = github.repos.uploadReleaseAsset({
+let uploadResponse = await github.repos.uploadReleaseAsset({
   url: releaseResponse.data.upload_url,
   name: `john.png`,
   assetPath: `./john.png`,
