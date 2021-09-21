@@ -1,4 +1,4 @@
-let { GitHub, context } = await import("@actions/github")
+let { GitHub, context } = await npm("@actions/github")
 
 let github = new GitHub(process.env.GITHUB_TOKEN)
 let { owner, repo } = context.repo
