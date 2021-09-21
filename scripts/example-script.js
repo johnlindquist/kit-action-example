@@ -8,7 +8,7 @@ try {
 
   console.log({ github })
 
-  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
+  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm-SS")
   let releaseResponse =
     await github.rest.repos.createRelease({
       owner,
@@ -19,24 +19,14 @@ try {
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
 
-  let uploadResponse = await github.request(
-    "POST /repos/{owner}/{repo}/releases/{release_id}/assets",
-    {
-      headers: { "Content-Type": "application/json" },
-      owner,
-      repo,
-      release_id: releaseResponse.data.id,
-      name: `package.json`,
-      data: await readFile(home("package.json")),
-    }
-  )
-  // await github.rest.repos.uploadReleaseAsset({
-  //   owner,
-  //   repo,
-  //   release_id: releaseResponse.data.id,
-  //   name: `package.json`,
-  //   data: await readFile(home("package.json")),
-  // })
+  await github.rest.repos.uploadReleaseAsset({
+    headers: { "Content-Type": "application/json" },
+    owner,
+    repo,
+    release_id: releaseResponse.data.id,
+    name: `package.json`,
+    data: await readFile(home("package.json")),
+  })
 
   console.log(`🤔 uploadResponse`)
   console.log(uploadResponse.data)
