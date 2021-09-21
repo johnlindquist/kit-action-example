@@ -1,5 +1,4 @@
 let { format } = await npm("date-fns")
-let { statSync } = await import("fs")
 let { context } = await npm("@actions/github")
 let { Octokit } = await npm("@octokit/rest")
 
@@ -18,17 +17,8 @@ let releaseResponse = await github.rest.repos.createRelease(
   }
 )
 
-let imagePath = home("john.png")
-await writeFile(
-  imagePath,
-  await download(
-    `https://johnlindquist.com/images/logo/john@2x.png`
-  )
-)
-
 let headers = {
   "content-type": "image/png",
-  "content-length": statSync(imagePath).size,
 }
 
 let uploadResponse =
@@ -37,8 +27,10 @@ let uploadResponse =
     owner,
     repo,
     release_id: releaseResponse.data.id,
-    name: "john.png",
-    data: await readFile(imagePath),
+    name: "john@2x.png",
+    data: await download(
+      `https://johnlindquist.com/images/logo/john@2x.png`
+    ),
   })
 
 console.log(
