@@ -26,14 +26,15 @@ try {
     )
   )
 
-  const headers = { "content-type": "image/png" }
+  let headers = { "content-type": "image/png" }
   let uploadResponse =
     await github.rest.repos.uploadReleaseAsset({
+      name: `john.png`,
+      label: `some-label`,
       headers,
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      name: `john.png`,
       data: await readFile("./john.png"),
     })
 
