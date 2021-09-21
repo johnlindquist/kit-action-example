@@ -8,8 +8,6 @@ try {
   console.log({ owner, repo })
   let github = new Octokit(process.env.GITHUB_TOKEN)
 
-  console.log({ github })
-
   let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
   let releaseResponse =
     await github.rest.repos.createRelease({
