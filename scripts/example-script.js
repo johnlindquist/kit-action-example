@@ -28,7 +28,7 @@ try {
     repo,
     release_id: releaseResponse.data.id,
     name: `package.json`,
-    file: await readFile(home("package.json")),
+    data: await readFile(home("package.json")),
   })
 
   console.log(`🤔 uploadResponse`)
