@@ -12,7 +12,7 @@ try {
     await github.rest.repos.createRelease({
       owner,
       repo,
-      tag_name: format(new Date(), "yyyy-MM-dd-T-HH-mm"),
+      tag_name: format(new Date(), "yyyy-MM-dd-HH-mm"),
     })
 
   console.log(`🤔 releaseResponse`)
@@ -29,7 +29,7 @@ try {
     await github.rest.repos.uploadReleaseAsset({
       owner,
       repo,
-      releaseId: releaseResponse.data.id,
+      release_id: releaseResponse.data.id,
       name: `john.png`,
       data: await readFile("./john.png"),
     })
