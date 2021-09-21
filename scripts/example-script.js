@@ -12,7 +12,7 @@ try {
     await github.rest.repos.createRelease({
       owner,
       repo,
-      tag_name: format(new Date(), "yyyy-MM-dd'T'HH:mm"),
+      tag_name: format(new Date(), "yyyy-MM-dd-T-HH-mm"),
     })
 
   console.log(`🤔 releaseResponse`)
