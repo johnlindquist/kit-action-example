@@ -29,8 +29,8 @@ try {
     await github.rest.repos.uploadReleaseAsset({
       owner,
       repo,
-      release_id: releaseResponse.data.node_id,
-      name: `john.png`,
+      release_id: releaseResponse.data.id,
+      name: "john-logo.png",
       data: await readFile("./john.png"),
     })
 
