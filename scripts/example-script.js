@@ -20,7 +20,10 @@ try {
   console.log(releaseResponse.data)
 
   await github.rest.repos.uploadReleaseAsset({
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/vnd.github.v3+json",
+    },
     owner,
     repo,
     release_id: releaseResponse.data.id,
