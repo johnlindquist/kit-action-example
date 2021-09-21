@@ -1,11 +1,12 @@
 let { format } = await npm("date-fns")
 let { statSync } = await import("fs")
 let g = await npm("@actions/github")
+let { Octokit } = await npm("@octokit/rest")
 
 try {
   let { owner, repo } = g.context.repo
   console.log({ owner, repo })
-  let github = g.getOctokit(process.env.GITHUB_TOKEN)
+  let github = new Octokit(process.env.GITHUB_TOKEN)
 
   console.log({ github })
 
