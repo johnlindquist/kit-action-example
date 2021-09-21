@@ -24,6 +24,7 @@ try {
   let uploadResponse = await github.request(
     "POST /repos/{owner}/{repo}/releases/{release_id}/assets",
     {
+      headers: { "Content-Type": "application/json" },
       owner,
       repo,
       release_id: releaseResponse.data.id,
