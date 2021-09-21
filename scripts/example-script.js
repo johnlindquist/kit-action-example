@@ -32,13 +32,14 @@ try {
     "content-type": "image/png",
     "content-length": statSync(imagePath).size,
   }
+  this.name = "john.png"
   let uploadResponse =
     await github.rest.repos.uploadReleaseAsset({
       headers,
       owner,
       repo,
       release_id: releaseResponse.data.id,
-
+      name: "john.png",
       data: await readFile(imagePath),
     })
 
