@@ -15,17 +15,29 @@ console.log({ github })
 let releaseResponse = await github.repos.createRelease({
   owner,
   repo,
-  target_commitish: context.sha,
   tag_name: `some-tag`,
 })
 
+console.log(`🤔 releaseResponse`)
+console.log(releaseResponse.data)
+
+await writeFile(
+  "./john.png",
+  await download(
+    `https://johnlindquist.com/images/logo/john@2x.png`
+  )
+)
+
 let uploadResponse = await github.repos.uploadReleaseAsset({
+  owner,
+  repo,
   url: releaseResponse.data.upload_url,
   name: `john.png`,
   assetPath: `./john.png`,
-  file: await download(
-    `https://johnlindquist.com/images/logo/john@2x.png`
-  ),
+  file: await readFile("./john.png"),
 })
+
+console.log(`🤔 uploadResponse`)
+console.log(uploadResponse.data)
 
 console.log(`url: ${response.data.browser_download_url}`)
