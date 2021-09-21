@@ -19,6 +19,8 @@ try {
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
 
+  await wait(5000)
+
   let uploadResponse = await github.request(
     "POST /repos/{owner}/{repo}/releases/{release_id}/assets",
     {
