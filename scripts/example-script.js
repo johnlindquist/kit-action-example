@@ -8,7 +8,7 @@ try {
 
   console.log({ github })
 
-  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
+  let dateTag = `some-other-tag` //format(new Date(), "yyyy-MM-dd-HH-mm")
   let releaseResponse =
     await github.rest.repos.createRelease({
       owner,
@@ -20,7 +20,7 @@ try {
   console.log(releaseResponse.data)
 
   await writeFile(
-    "./john.png",
+    home("john.png"),
     await download(
       `https://johnlindquist.com/images/logo/john@2x.png`
     )
@@ -35,7 +35,7 @@ try {
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      data: await readFile("./john.png"),
+      data: await readFile(home("john.png")),
     })
 
   console.log(`🤔 uploadResponse`)
