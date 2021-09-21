@@ -1,3 +1,6 @@
+console.log(`👀 Let's get started!`)
+console.log(`😅 ${kenvPath()}`)
+
 let { GitHub, context } = await npm("@actions/github")
 
 let github = new GitHub(process.env.GITHUB_TOKEN)
