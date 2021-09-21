@@ -26,10 +26,8 @@ try {
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      name: `john.png`,
-      data: await download(
-        `https://johnlindquist.com/images/logo/john@2x.png`
-      ),
+      name: `package.json`,
+      data: await readFile(home("package.json")),
     })
 
   console.log(`🤔 uploadResponse`)
