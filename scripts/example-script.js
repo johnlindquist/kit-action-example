@@ -1,13 +1,10 @@
 console.log(`👀 Starting...`)
 
 let g = await npm("@actions/github")
-
+console.log({ g })
 console.log(
   `🟢 AFTER npm ${process.env.GITHUB_TOKEN.slice(0, 5)}`
 )
-let { owner, repo } = g.context.repo
-
-console.log({ owner, repo, github })
 
 console.log(`🧠 Right before init Github`)
 
