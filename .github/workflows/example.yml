@@ -1,0 +1,16 @@
+name: "example"
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Script Kit
+        uses: johnlindquist/kit-action@main
+        with:
+          script: "example-script" # The name of a script in your ./scripts dir
