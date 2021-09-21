@@ -39,9 +39,9 @@ try {
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      name: "john.png",
+      name: "",
       data: await readFile(imagePath),
-      label: "john.png",
+      label: "",
     })
 
   console.log(`🤔 uploadResponse`)
