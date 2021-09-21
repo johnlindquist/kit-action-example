@@ -5,11 +5,13 @@ let { GitHub, context } = await npm("@actions/github")
 console.log(
   `🟢 AFTER npm ${process.env.GITHUB_TOKEN.slice(0, 5)}`
 )
-
-let github = new GitHub(process.env.GITHUB_TOKEN)
 let { owner, repo } = context.repo
 
 console.log({ owner, repo })
+
+console.log(`🧠 Right before init Github`)
+let github = new GitHub(process.env.GITHUB_TOKEN)
+
 console.log({ github })
 
 let releaseResponse = await github.repos.createRelease({
