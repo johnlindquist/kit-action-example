@@ -32,7 +32,7 @@ try {
     "content-type": "image/png",
     "content-length": statSync(imagePath).size,
   }
-  this.name = "john.png"
+  global.name = "john.png"
   let uploadResponse =
     await github.rest.repos.uploadReleaseAsset({
       headers,
