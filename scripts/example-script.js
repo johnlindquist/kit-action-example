@@ -9,7 +9,7 @@ console.log(
 console.log(`🧠 Right before init Github`)
 
 try {
-  let { owner, repo } = g.context
+  let { owner, repo } = g.context.repo
   console.log({ owner, repo })
   let github = g.getOctokit(process.env.GITHUB_TOKEN)
 
