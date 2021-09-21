@@ -1,12 +1,5 @@
-console.log(`👀 Starting...`)
-
+let { format } = await npm("date-fns")
 let g = await npm("@actions/github")
-console.log({ g })
-console.log(
-  `🟢 AFTER npm ${process.env.GITHUB_TOKEN.slice(0, 5)}`
-)
-
-console.log(`🧠 Right before init Github`)
 
 try {
   let { owner, repo } = g.context.repo
@@ -19,7 +12,7 @@ try {
     await github.rest.repos.createRelease({
       owner,
       repo,
-      tag_name: g.context.sha,
+      tag_name: format(new Date(), "yyyy-MM-dd'T'HH:mm"),
     })
 
   console.log(`🤔 releaseResponse`)
