@@ -19,8 +19,6 @@ try {
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
 
-  await writeFile(home("john.png"))
-
   let headers = { "content-type": "image/png" }
   let uploadResponse =
     await github.rest.repos.uploadReleaseAsset({
