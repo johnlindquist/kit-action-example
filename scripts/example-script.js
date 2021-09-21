@@ -1,12 +1,3 @@
-console.log(`😅 ${kenvPath()}`)
-console.log(`👀 Let's get started!`)
-console.log(`👀 noe!`)
-console.log(`👀 Let's get started!`)
-console.log(`🧠 AHHH`)
-console.log(`👀 Let's get started!`)
-console.log(`👀 Let's get started!`)
-console.log(`👀 Let's get started!`)
-
 let { GitHub, context } = await npm("@actions/github")
 
 console.log(`🟢 AFTER INSTALL`)
@@ -17,20 +8,20 @@ let { owner, repo } = context.repo
 console.log({ owner, repo })
 console.log({ github })
 
-// let releaseResponse = await github.repos.createRelease({
-//   owner,
-//   repo,
-//   target_commitish: context.sha,
-//   tag_name: `some-tag`,
-// })
+let releaseResponse = await github.repos.createRelease({
+  owner,
+  repo,
+  target_commitish: context.sha,
+  tag_name: `some-tag`,
+})
 
-// let uploadResponse = github.repos.uploadReleaseAsset({
-//   url: releaseResponse.data.upload_url,
-//   name: `john.png`,
-//   assetPath: `./john.png`,
-//   file: await download(
-//     `https://johnlindquist.com/images/logo/john@2x.png`
-//   ),
-// })
+let uploadResponse = github.repos.uploadReleaseAsset({
+  url: releaseResponse.data.upload_url,
+  name: `john.png`,
+  assetPath: `./john.png`,
+  file: await download(
+    `https://johnlindquist.com/images/logo/john@2x.png`
+  ),
+})
 
-// console.log(`url: ${response.data.browser_download_url}`)
+console.log(`url: ${response.data.browser_download_url}`)
