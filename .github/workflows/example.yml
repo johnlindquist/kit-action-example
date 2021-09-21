@@ -15,4 +15,4 @@ jobs:
         with:
           script: "example-script" # The name of a script in your ./scripts dir
         env:
-          GITHUB_TOKEN: "${{ secrets.REPO_TOKEN }}"
+          REPO_TOKEN: "${{ secrets.REPO_TOKEN }}"
