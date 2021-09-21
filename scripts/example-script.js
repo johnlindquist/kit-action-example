@@ -19,12 +19,7 @@ try {
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
 
-  await writeFile(
-    home("john.png"),
-    await download(
-      `https://johnlindquist.com/images/logo/john@2x.png`
-    )
-  )
+  await writeFile(home("john.png"))
 
   let headers = { "content-type": "image/png" }
   let uploadResponse =
@@ -33,7 +28,10 @@ try {
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      data: await readFile(home("john.png")),
+      name: `john.png`,
+      data: await download(
+        `https://johnlindquist.com/images/logo/john@2x.png`
+      ),
     })
 
   console.log(`🤔 uploadResponse`)
