@@ -41,6 +41,7 @@ try {
       release_id: releaseResponse.data.id,
       name: "john.png",
       data: await readFile(imagePath),
+      label: "john.png",
     })
 
   console.log(`🤔 uploadResponse`)
