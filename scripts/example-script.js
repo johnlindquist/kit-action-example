@@ -39,8 +39,7 @@ try {
       headers,
       owner,
       repo,
-      release_id: releaseResponse.data.id,
-      releaseId: releaseResponse.data.id,
+      release_id: releaseResponse.data.tag_name,
       name: "john.png",
       data: await readFile(imagePath),
     })
