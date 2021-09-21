@@ -19,10 +19,8 @@ try {
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
 
-  let headers = { "content-type": "image/png" }
   let uploadResponse =
     await github.rest.repos.uploadReleaseAsset({
-      headers,
       owner,
       repo,
       release_id: releaseResponse.data.id,
