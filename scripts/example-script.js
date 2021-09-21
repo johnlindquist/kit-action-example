@@ -7,7 +7,7 @@ console.log(
 )
 let { owner, repo } = context.repo
 
-console.log({ owner, repo })
+console.log({ owner, repo, GitHub })
 
 console.log(`🧠 Right before init Github`)
 let github = new GitHub(process.env.GITHUB_TOKEN)
