@@ -38,7 +38,7 @@ try {
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      name: `"john.png"`,
+
       data: await readFile(imagePath),
     })
 
