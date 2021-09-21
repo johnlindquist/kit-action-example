@@ -19,7 +19,7 @@ try {
     await github.rest.repos.createRelease({
       owner,
       repo,
-      tag_name: `some-tag`,
+      tag_name: g.context.sha,
     })
 
   console.log(`🤔 releaseResponse`)
