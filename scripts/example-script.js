@@ -8,7 +8,7 @@ try {
 
   console.log({ github })
 
-  let dateTag = `some-other-tag` //format(new Date(), "yyyy-MM-dd-HH-mm")
+  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
   let releaseResponse =
     await github.rest.repos.createRelease({
       owner,
@@ -29,8 +29,6 @@ try {
   let headers = { "content-type": "image/png" }
   let uploadResponse =
     await github.rest.repos.uploadReleaseAsset({
-      name: `john.png`,
-      label: `some-label`,
       headers,
       owner,
       repo,
