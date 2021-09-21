@@ -8,11 +8,12 @@ try {
 
   console.log({ github })
 
+  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
   let releaseResponse =
     await github.rest.repos.createRelease({
       owner,
       repo,
-      tag_name: format(new Date(), "yyyy-MM-dd-HH-mm"),
+      tag_name: dateTag,
     })
 
   console.log(`🤔 releaseResponse`)
@@ -30,7 +31,7 @@ try {
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      name: "john-logo.png",
+      name: `${dateTag}.png`,
       data: await readFile("./john.png"),
     })
 
