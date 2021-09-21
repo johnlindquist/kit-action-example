@@ -1,5 +1,5 @@
 let { format } = await npm("date-fns")
-let { statSync } = await npm("fs")
+let { statSync } = await import("fs")
 let g = await npm("@actions/github")
 
 try {
