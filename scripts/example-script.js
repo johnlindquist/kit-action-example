@@ -1,7 +1,15 @@
-console.log(`👀 Let's get started!`)
 console.log(`😅 ${kenvPath()}`)
+console.log(`👀 Let's get started!`)
+console.log(`👀 noe!`)
+console.log(`👀 Let's get started!`)
+console.log(`🧠 AHHH`)
+console.log(`👀 Let's get started!`)
+console.log(`👀 Let's get started!`)
+console.log(`👀 Let's get started!`)
 
 let { GitHub, context } = await npm("@actions/github")
+
+console.log(`🟢 AFTER INSTALL`)
 
 let github = new GitHub(process.env.GITHUB_TOKEN)
 let { owner, repo } = context.repo
