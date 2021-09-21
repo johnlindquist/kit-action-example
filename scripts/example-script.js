@@ -7,7 +7,7 @@ try {
   let { owner, repo } = g.context.repo
   console.log({ owner, repo })
   let github = new Octokit({
-    auth: process.env.GITHUB_TOKEN,
+    auth: await env("REPO_TOKEN"),
   })
 
   let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
@@ -39,7 +39,7 @@ try {
       headers,
       owner,
       repo,
-      release_id: releaseResponse.data.tag_name,
+      release_id: releaseResponse.data.id,
       name: "john.png",
       data: await readFile(imagePath),
     })
@@ -47,7 +47,9 @@ try {
   console.log(`🤔 uploadResponse`)
   console.log(uploadResponse.data)
 
-  console.log(`url: ${response.data.browser_download_url}`)
+  console.log(
+    `url: ${uploadResponse.data.browser_download_url}`
+  )
 } catch (error) {
   console.log(error)
 }
