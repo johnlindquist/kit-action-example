@@ -13,11 +13,12 @@ try {
 
   console.log({ github })
 
-  let releaseResponse = await github.repos.createRelease({
-    owner,
-    repo,
-    tag_name: `some-tag`,
-  })
+  let releaseResponse =
+    await github.rest.repos.createRelease({
+      owner,
+      repo,
+      tag_name: `some-tag`,
+    })
 
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
@@ -30,7 +31,7 @@ try {
   )
 
   let uploadResponse =
-    await github.repos.uploadReleaseAsset({
+    await github.rest.repos.uploadReleaseAsset({
       owner,
       repo,
       url: releaseResponse.data.upload_url,
