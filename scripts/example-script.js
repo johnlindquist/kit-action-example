@@ -19,14 +19,23 @@ try {
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
 
-  let uploadResponse =
-    await github.rest.repos.uploadReleaseAsset({
+  let uploadResponse = await github.request(
+    "POST /repos/{owner}/{repo}/releases/{release_id}/assets",
+    {
       owner,
       repo,
       release_id: releaseResponse.data.id,
       name: `package.json`,
       data: await readFile(home("package.json")),
-    })
+    }
+  )
+  // await github.rest.repos.uploadReleaseAsset({
+  //   owner,
+  //   repo,
+  //   release_id: releaseResponse.data.id,
+  //   name: `package.json`,
+  //   data: await readFile(home("package.json")),
+  // })
 
   console.log(`🤔 uploadResponse`)
   console.log(uploadResponse.data)
