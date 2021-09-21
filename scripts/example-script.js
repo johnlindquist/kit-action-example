@@ -30,7 +30,7 @@ try {
       owner,
       repo,
       release_id: releaseResponse.data.id,
-      name: `john.png`,
+      name: `john`,
       data: await readFile("./john.png"),
     })
 
