@@ -1,6 +1,8 @@
+console.log(`👀 Starting...`)
+
 let { GitHub, context } = await npm("@actions/github")
 
-console.log(`🟢 AFTER INSTALL`)
+console.log(`🟢 AFTER npm`)
 
 let github = new GitHub(process.env.GITHUB_TOKEN)
 let { owner, repo } = context.repo
