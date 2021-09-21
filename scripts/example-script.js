@@ -3,54 +3,44 @@ let { statSync } = await import("fs")
 let { context } = await npm("@actions/github")
 let { Octokit } = await npm("@octokit/rest")
 
-try {
-  let { owner, repo } = context.repo
-  let github = new Octokit({
-    auth: await env("REPO_TOKEN"),
-  })
+let { owner, repo } = context.repo
 
-  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
-  let releaseResponse =
-    await github.rest.repos.createRelease({
-      owner,
-      repo,
-      tag_name: dateTag,
-    })
+let github = new Octokit({
+  auth: await env("REPO_TOKEN"),
+})
 
-  console.log(`🤔 releaseResponse`)
-  console.log(releaseResponse.data)
-
-  let imagePath = home("john.png")
-  await writeFile(
-    imagePath,
-    await download(
-      `https://johnlindquist.com/images/logo/john@2x.png`
-    )
-  )
-
-  let headers = {
-    "content-type": "image/png",
-    "content-length": statSync(imagePath).size,
+let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
+let releaseResponse = await github.rest.repos.createRelease(
+  {
+    owner,
+    repo,
+    tag_name: dateTag,
   }
+)
 
-  let uploadResponse =
-    await github.rest.repos.uploadReleaseAsset({
-      headers,
-      owner,
-      repo,
-      release_id: releaseResponse.data.id,
-      name: "john.png",
-      data: await readFile(imagePath),
-    })
-
-  console.log(`🤔 uploadResponse`)
-  console.log(uploadResponse.data)
-
-  console.log(
-    `url: ${uploadResponse.data.browser_download_url}`
+let imagePath = home("john.png")
+await writeFile(
+  imagePath,
+  await download(
+    `https://johnlindquist.com/images/logo/john@2x.png`
   )
-} catch (error) {
-  console.log(error)
+)
+
+let headers = {
+  "content-type": "image/png",
+  "content-length": statSync(imagePath).size,
 }
 
-export {}
+let uploadResponse =
+  await github.rest.repos.uploadReleaseAsset({
+    headers,
+    owner,
+    repo,
+    release_id: releaseResponse.data.id,
+    name: "john.png",
+    data: await readFile(imagePath),
+  })
+
+console.log(
+  `url: ${uploadResponse.data.browser_download_url}`
+)
