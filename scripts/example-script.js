@@ -1,4 +1,5 @@
 let { format } = await npm("date-fns")
+let { statSync } = await npm("fs")
 let g = await npm("@actions/github")
 
 try {
@@ -8,7 +9,7 @@ try {
 
   console.log({ github })
 
-  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm-SS")
+  let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
   let releaseResponse =
     await github.rest.repos.createRelease({
       owner,
@@ -19,17 +20,27 @@ try {
   console.log(`🤔 releaseResponse`)
   console.log(releaseResponse.data)
 
-  await github.rest.repos.uploadReleaseAsset({
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/vnd.github.v3+json",
-    },
-    owner,
-    repo,
-    release_id: releaseResponse.data.id,
-    name: `package.json`,
-    data: "Hello world",
-  })
+  let imagePath = home("john.png")
+  await writeFile(
+    imagePath,
+    await download(
+      `https://johnlindquist.com/images/logo/john@2x.png`
+    )
+  )
+
+  let headers = {
+    "content-type": "image/png",
+    "content-length": statSync(imagePath).size,
+  }
+  let uploadResponse =
+    await github.rest.repos.uploadReleaseAsset({
+      headers,
+      owner,
+      repo,
+      release_id: releaseResponse.data.id,
+      name: `john.png`,
+      data: await readFile(imagePath),
+    })
 
   console.log(`🤔 uploadResponse`)
   console.log(uploadResponse.data)
