@@ -13,6 +13,10 @@ jobs:
       - name: Script Kit
         uses: johnlindquist/kit-action@main
         with:
-          script: "example-script" # The name of a script in your ./scripts dir
+          # The name of a script in your ./scripts dir
+          script: "example-script"
+          # Space-separated string arguments passed to each "await arg()"
+          args: "https://johnlindquist.com/images/logo/john@2x.png"
+
         env:
           REPO_TOKEN: "${{ secrets.REPO_TOKEN }}"
