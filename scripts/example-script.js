@@ -8,7 +8,7 @@ let github = new Octokit({
   auth: await env("REPO_TOKEN"),
 })
 
-let url = await url("Enter url:")
+let url = await arg("Enter url:")
 
 let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
 let releaseResponse = await github.rest.repos.createRelease({
