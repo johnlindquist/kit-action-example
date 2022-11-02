@@ -19,4 +19,4 @@ jobs:
           args: "https://johnlindquist.com/images/logo/john@2x.png"
 
         env:
-          REPO_TOKEN: "${{ secrets.REPO_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

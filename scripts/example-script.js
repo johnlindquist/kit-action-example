@@ -5,7 +5,7 @@ let { Octokit } = await npm("@octokit/rest")
 let { owner, repo } = context.repo
 
 let github = new Octokit({
-  auth: process.env.REPO_TOKEN, //await env("REPO_TOKEN"),
+  auth: await env("GITHUB_TOKEN"),
 })
 
 let url = await arg("Enter url:")
