@@ -1,20 +1,16 @@
 let { format } = await npm("date-fns")
-let { context } = await npm("@actions/github")
-let { Octokit } = await npm("@octokit/rest")
 let sharp = await npm("sharp")
 
-let { owner, repo } = context.repo
+let { owner, repo } = github.context.repo
 
-let github = new Octokit({
-  auth: await env("GITHUB_TOKEN"),
-})
+let octokit = github.getOctokit(await env("GITHUB_TOKEN"))
 
 let url = await arg("Enter url:")
 let width = await arg("Enter width:")
 let height = await arg("Enter height:")
 
 let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
-let releaseResponse = await github.rest.repos.createRelease({
+let releaseResponse = await octokit.rest.repos.createRelease({
   owner,
   repo,
   tag_name: dateTag,
@@ -27,7 +23,7 @@ let headers = {
 let buffer = await download(url)
 let data = await sharp(buffer).resize(width, height)
 
-let uploadResponse = await github.rest.repos.uploadReleaseAsset({
+let uploadResponse = await octokit.rest.repos.uploadReleaseAsset({
   headers,
   owner,
   repo,
