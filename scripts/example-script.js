@@ -1,7 +1,9 @@
 let { format } = await npm("date-fns")
 let sharp = await npm("sharp")
 
-let octokit = github.getOctokit(core.getInput("token"))
+let octokit = github.getOctokit(await env("GITHUB_TOKEN"))
+
+console.log({ octokit })
 
 let url = await arg("Enter url:")
 let width = await arg("Enter width:")
