@@ -15,8 +15,8 @@ jobs:
         with:
           # The name of a script in your ./scripts dir
           script: "example-script"
-          # Space-separated string arguments passed to each "await arg()"
-          args: "https://johnlindquist.com/images/logo/john@2x.png"
+          # Optional space-separated string arguments passed to each "await arg()"
+          args: "https://johnlindquist.com/images/logo/john@2x.png 100 100"
 
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
