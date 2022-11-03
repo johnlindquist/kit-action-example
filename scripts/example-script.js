@@ -1,7 +1,7 @@
 let { format } = await npm("date-fns")
 let sharp = await npm("sharp")
 
-let octokit = github.getOctokit(await env("GITHUB_TOKEN"))
+let octokit = github.getOctokit(core.getInput("token"))
 
 let url = await arg("Enter url:")
 let width = await arg("Enter width:")
@@ -21,6 +21,7 @@ console.log(`Downloading image from ${url}`)
 let buffer = await download(url)
 console.log(`Resizing image to ${width}x${height}`)
 let data = await sharp(buffer).resize(+width, +height)
+console.log(`Uploading image to release`)
 
 let uploadResponse = await octokit.rest.repos.uploadReleaseAsset({
   headers,
