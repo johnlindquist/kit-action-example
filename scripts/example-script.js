@@ -20,7 +20,7 @@ let headers = {
 console.log(`Downloading image from ${url}`)
 let buffer = await download(url)
 console.log(`Resizing image to ${width}x${height}`)
-let data = await sharp(buffer).resize(width, height)
+let data = await sharp(buffer).resize(+width, +height)
 
 let uploadResponse = await octokit.rest.repos.uploadReleaseAsset({
   headers,
