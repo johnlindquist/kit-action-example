@@ -1,8 +1,6 @@
 let { format } = await npm("date-fns")
 let sharp = await npm("sharp")
 
-let { owner, repo } = github.context.repo
-
 let octokit = github.getOctokit(await env("GITHUB_TOKEN"))
 
 let url = await arg("Enter url:")
@@ -11,8 +9,7 @@ let height = await arg("Enter height:")
 
 let dateTag = format(new Date(), "yyyy-MM-dd-HH-mm")
 let releaseResponse = await octokit.rest.repos.createRelease({
-  owner,
-  repo,
+  ...github.context.repo,
   tag_name: dateTag,
 })
 
@@ -20,13 +17,14 @@ let headers = {
   "content-type": "image/png",
 }
 
+console.log(`Downloading image from ${url}`)
 let buffer = await download(url)
+console.log(`Resizing image to ${width}x${height}`)
 let data = await sharp(buffer).resize(width, height)
 
 let uploadResponse = await octokit.rest.repos.uploadReleaseAsset({
   headers,
-  owner,
-  repo,
+  ...github.context.repo,
   release_id: releaseResponse.data.id,
   name: path.basename(url),
   data,
